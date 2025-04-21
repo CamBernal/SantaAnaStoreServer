@@ -32,10 +32,17 @@ const io = new Server(server); // Inicializar Socket.IO
  * Middleware para manejar el cuerpo de las solicitudes POST    
  */
 app.use(express.json()) // Para JSON
-app.use(express.urlencoded({ extended: true })) // Para datos URL-encoded
+app.use(express.urlencoded({ extended: true })) 
+// Para datos URL-encoded
+const allowedOrigins = ['http://localhost:42000', 'http://otro-origen.com'];
 app.use(cors({
-  origin: 'http://localhost:3100', // Cambia esto al dominio de tu cliente
-  credentials: true, // Permitir el envío de cookies
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
 }));
 
 /**
