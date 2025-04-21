@@ -34,7 +34,7 @@ const io = new Server(server); // Inicializar Socket.IO
 app.use(express.json()) // Para JSON
 app.use(express.urlencoded({ extended: true })) 
 // Para datos URL-encoded
-const allowedOrigins = ['http://localhost:42000', 'http://otro-origen.com'];
+const allowedOrigins = ['http://localhost:4200', 'http://otro-origen.com'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {

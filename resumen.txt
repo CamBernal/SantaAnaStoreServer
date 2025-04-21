@@ -1,0 +1,79 @@
+Resumen del Servidor
+
+1. Configuración inicial del servidor
+Framework: Usamos Express como framework principal para manejar las solicitudes HTTP.
+Middleware básico:
+express.json() y express.urlencoded() para manejar datos en formato JSON y datos codificados en URL.
+cors para manejar las políticas de CORS y permitir solicitudes desde el frontend.
+express-session para manejar sesiones de usuario.
+passport para la autenticación de usuarios.
+2. Configuración de rutas
+Creamos y configuramos múltiples rutas para manejar diferentes funcionalidades de la aplicación:
+
+Productos (/api/products):
+
+Rutas para listar, buscar y filtrar productos.
+Conexión con la base de datos para obtener los productos.
+Categorías (/api/categories):
+
+Rutas para manejar categorías de productos.
+Carrito (/api/cart):
+
+Rutas para agregar, actualizar y eliminar productos del carrito.
+Autenticación (/api/auth):
+
+Rutas para registro, inicio de sesión, restablecimiento de contraseña y verificación de usuarios.
+Pedidos (/api/orders):
+
+Rutas para crear y listar pedidos.
+Usuarios (/api/users):
+
+Rutas para manejar usuarios, incluyendo la gestión de roles (admin y user).
+Inventario (/api/inventory):
+
+Rutas para manejar el stock de productos.
+Reportes (/api/reports):
+
+Rutas para generar reportes de ventas y productos más vendidos.
+Pagos (/api/payments):
+
+Rutas para manejar pagos con Stripe y Neki.
+Notificaciones (/api/notifications):
+
+Rutas para enviar notificaciones por correo electrónico.
+Reseñas (/api/reviews):
+
+Rutas para agregar, listar y eliminar reseñas de productos.
+3. Conexión con la base de datos
+Base de datos: Usamos MySQL como base de datos.
+Conexión: Configuramos la conexión a la base de datos en un archivo separado (db.js) y la importamos en el servidor.
+Consultas SQL: Implementamos consultas SQL para manejar las operaciones CRUD en las tablas de la base de datos.
+4. Configuración de CORS
+Configuramos el middleware cors para permitir solicitudes desde el frontend (http://localhost:4200).
+Ejemplo de configuración:
+5. Configuración de sesiones
+Usamos express-session para manejar sesiones de usuario.
+Configuración básica:
+6. Configuración de autenticación con Passport
+Inicializamos passport para manejar estrategias de autenticación (como JWT o autenticación local).
+Configuración básica:
+7. Configuración de Socket.IO
+Configuramos Socket.IO para manejar conexiones en tiempo real.
+Ejemplo de configuración:
+8. Variables de entorno
+Usamos dotenv para manejar variables de entorno desde un archivo .env.
+Ejemplo de configuración:
+9. Configuración del servidor
+Configuramos el servidor para escuchar en el puerto definido en las variables de entorno o en un valor por defecto (3000).
+Ejemplo:
+10. Estructura del proyecto
+La estructura del proyecto quedó organizada de la siguiente manera:
+
+11. Funcionalidades implementadas
+Autenticación: Registro, inicio de sesión y manejo de sesiones.
+Gestión de productos: Listar, buscar y filtrar productos.
+Carrito de compras: Agregar, actualizar y eliminar productos del carrito.
+Pagos: Integración con Stripe y Neki.
+Notificaciones: Envío de correos electrónicos.
+Reseñas: Agregar y listar reseñas de productos.
+Reportes: Generación de reportes de ventas.

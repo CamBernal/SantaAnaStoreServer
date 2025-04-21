@@ -7,7 +7,7 @@ const isAuthenticated = require('../middleware/isAuthenticated'); // Middleware 
 /**
  * Crear un pago
  */
-router.post('/create-payment', isAuthenticated, async (req, res) => {
+router.post('/create-payment/add', isAuthenticated, async (req, res) => {
     const { amount, currency = 'usd' } = req.body;
 
     try {

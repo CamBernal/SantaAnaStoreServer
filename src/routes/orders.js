@@ -6,7 +6,7 @@ const isAuthenticated = require('../middleware/isAuthenticated'); // Middleware 
 /**
  * Crear un pedido
  */
-router.post('/', isAuthenticated, (req, res) => {
+router.post('/orders/add', isAuthenticated, (req, res) => {
     const { items } = req.body; // `items` debe ser un array con los productos del carrito
     const userId = req.user.id;
 
@@ -50,7 +50,7 @@ router.post('/', isAuthenticated, (req, res) => {
 /**
  * Obtener pedidos del usuario autenticado
  */
-router.get('/', isAuthenticated, (req, res) => {
+router.get('/orders', isAuthenticated, (req, res) => {
     const userId = req.user.id;
 
     const query = `

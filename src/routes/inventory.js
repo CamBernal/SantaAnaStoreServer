@@ -25,7 +25,7 @@ router.put('/presentations/:id/stock', isAuthenticated, isAdmin, (req, res) => {
 /**
  * Obtener productos con bajo stock (solo administradores)
  */
-router.get('/low-stock', isAuthenticated, isAdmin, (req, res) => {
+router.get('presentations/low-stock', isAuthenticated, isAdmin, (req, res) => {
     const { threshold = 5 } = req.query; // Umbral de stock bajo, por defecto 5
 
     const query = `

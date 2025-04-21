@@ -6,7 +6,7 @@ const isAuthenticated = require('../middleware/isAuthenticated'); // Middleware 
 /**
  * Agregar una reseña a un producto
  */
-router.post('/:productId', isAuthenticated, (req, res) => {
+router.post('/reviews/add/:productId', isAuthenticated, (req, res) => {
     const { productId } = req.params;
     const { rating, comment } = req.body;
     const userId = req.user.id;
@@ -24,7 +24,7 @@ router.post('/:productId', isAuthenticated, (req, res) => {
 /**
  * Obtener reseñas de un producto
  */
-router.get('/:productId', (req, res) => {
+router.get('/reviews/:productId', (req, res) => {
     const { productId } = req.params;
 
     const query = `
@@ -43,7 +43,7 @@ router.get('/:productId', (req, res) => {
 /**
  * Eliminar una reseña (solo el autor o un administrador)
  */
-router.delete('/:reviewId', isAuthenticated, (req, res) => {
+router.delete('/reviews/delete/:reviewId', isAuthenticated, (req, res) => {
     const { reviewId } = req.params;
     const userId = req.user.id;
 

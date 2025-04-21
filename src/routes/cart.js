@@ -21,7 +21,7 @@ const isAuthenticated = (req, res, next) => {
 /**
  * Obtener el contenido del carrito
  */
-router.get('/', isAuthenticated, (req, res) => {
+router.get('/cart', isAuthenticated, (req, res) => {
     const query = `
         SELECT cart.*, presentations.type, presentations.size, presentations.price, products.name AS product_name
         FROM cart
@@ -39,7 +39,7 @@ router.get('/', isAuthenticated, (req, res) => {
 /**
  * Agregar un producto al carrito
  */
-router.post('/add', isAuthenticated, (req, res) => {
+router.post('/cart/add', isAuthenticated, (req, res) => {
     const { presentation_id, quantity } = req.body;
     const query = `
         INSERT INTO cart (user_id, presentation_id, quantity)
@@ -56,7 +56,7 @@ router.post('/add', isAuthenticated, (req, res) => {
 /**
  * Actualizar la cantidad de un producto en el carrito
  */
-router.put('/update/:id', isAuthenticated, (req, res) => {
+router.put('/cart/update/:id', isAuthenticated, (req, res) => {
     const { id } = req.params;
     const { quantity } = req.body;
     const query = `
@@ -75,7 +75,7 @@ router.put('/update/:id', isAuthenticated, (req, res) => {
 /**
  * Eliminar un producto del carrito
  */
-router.delete('/delete/:id', isAuthenticated, (req, res) => {
+router.delete('/cart/delete/:id', isAuthenticated, (req, res) => {
     const { id } = req.params;
     const query = `
         DELETE FROM cart

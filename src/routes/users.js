@@ -7,7 +7,7 @@ const isAdmin = require('../middleware/isAdmin'); // Middleware para verificar r
 /**
  * Obtener todos los usuarios (solo administradores)
  */
-router.get('/', isAuthenticated, isAdmin, (req, res) => {
+router.get('/users', isAuthenticated, isAdmin, (req, res) => {
     const query = `SELECT id, name, email, role, created_at FROM users`;
     db.query(query, (err, results) => {
         if (err) return res.status(500).json({ message: 'Error al obtener los usuarios', error: err });
@@ -18,7 +18,7 @@ router.get('/', isAuthenticated, isAdmin, (req, res) => {
 /**
  * Actualizar el rol de un usuario (solo administradores)
  */
-router.put('/:id/role', isAuthenticated, isAdmin, (req, res) => {
+router.put('/user/update/:id/role', isAuthenticated, isAdmin, (req, res) => {
     const { id } = req.params;
     const { role } = req.body;
 
@@ -36,7 +36,7 @@ router.put('/:id/role', isAuthenticated, isAdmin, (req, res) => {
 /**
  * Eliminar un usuario (solo administradores)
  */
-router.delete('/:id', isAuthenticated, isAdmin, (req, res) => {
+router.delete('/users/delete/:id', isAuthenticated, isAdmin, (req, res) => {
     const { id } = req.params;
 
     const query = `DELETE FROM users WHERE id = ?`;

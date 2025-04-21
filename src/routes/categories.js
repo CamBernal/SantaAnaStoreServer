@@ -6,7 +6,7 @@ const router = express.Router();
  * Obtener todas las categorías
  * * @swagger
  */
-router.get('/', (req, res) => {
+router.get('/categories', (req, res) => {
     const query = 'SELECT * FROM categories';
     db.query(query, (err, results) => {
         if (err) {
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 /**
  * Crear una nueva categoría
  */
-router.post('/', (req, res) => {
+router.post('/categories/add', (req, res) => {
     const { name } = req.body;
     const query = 'INSERT INTO categories (name) VALUES (?)';
     db.query(query, [name], (err, result) => {
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
  * * Actualizar una categoría
  * @swagger
  */
-router.put('/:id', (req, res) => {
+router.put('/categories/update/:id', (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
     const query = 'UPDATE categories SET name = ? WHERE id = ?';
@@ -49,7 +49,7 @@ router.put('/:id', (req, res) => {
 /**
  * Eliminar una categoría
  */
-router.delete('/:id', (req, res) => {
+router.delete('/categories/delete/:id', (req, res) => {
     const { id } = req.params;
     const query = 'DELETE FROM categories WHERE id = ?';
     db.query(query, [id], (err) => {
