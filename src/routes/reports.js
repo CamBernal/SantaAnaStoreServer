@@ -7,7 +7,7 @@ const isAdmin = require('../middleware/isAdmin'); // Middleware para verificar r
 /**
  * Reporte de ventas por fecha
  */
-router.get('/reports/sales', isAuthenticated, isAdmin, (req, res) => {
+router.get('/sales', isAuthenticated, isAdmin, (req, res) => {
     const { start_date, end_date } = req.query;
 
     const query = `
@@ -25,7 +25,7 @@ router.get('/reports/sales', isAuthenticated, isAdmin, (req, res) => {
 /**
  * Reporte de productos más vendidos
  */
-router.get('/reports/top-products', isAuthenticated, isAdmin, (req, res) => {
+router.get('/top-products', isAuthenticated, isAdmin, (req, res) => {
     const query = `
         SELECT products.name AS product_name, SUM(order_items.quantity) AS total_quantity
         FROM order_items

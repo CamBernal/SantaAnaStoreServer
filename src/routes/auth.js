@@ -114,7 +114,7 @@ router.use(passport.session());
  * Ruta para registrar un nuevo usuario
  * Esta ruta permite a los usuarios registrarse proporcionando un correo electrónico y una contraseña.
  */
-router.post('/auth/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) return res.status(500).json({ message: 'Error en el servidor', error: err });
       if (!user) return res.status(401).json({ message: info.message });
@@ -134,7 +134,7 @@ router.post('/auth/login', (req, res, next) => {
  * Ruta para iniciar sesión con Google
  * Esta ruta redirige al usuario a la página de inicio de sesión de Google.
  */
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get(
     '/google/callback',
@@ -148,7 +148,7 @@ router.get(
  * Ruta para iniciar sesión con Facebook
  * Esta ruta redirige al usuario a la página de inicio de sesión de Facebook.
  */
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
 router.get(
     '/facebook/callback',
@@ -162,7 +162,7 @@ router.get(
  * Ruta para cerrar sesión
  * Esta ruta permite a los usuarios cerrar sesión de su cuenta.
  */
-router.get('/auth/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     req.logout((err) => {
         if (err) return res.status(500).json({ message: 'Error al cerrar sesión', error: err });
         res.json({ message: 'Sesión cerrada exitosamente' });
@@ -172,7 +172,7 @@ router.get('/auth/logout', (req, res) => {
 /**
  * Ruta para solicitar un restablecimiento de contraseña    
  */
-router.post('/auth/forgot-password', (req, res) => {
+router.post('/forgot-password', (req, res) => {
     const { email } = req.body;
 
     // Verificar si el correo existe
@@ -220,7 +220,7 @@ router.post('/auth/forgot-password', (req, res) => {
  * Esta ruta permite a los usuarios solicitar un correo de verificación para su cuenta.
  * Se utiliza un token único para verificar la dirección de correo electrónico del usuario.
  */
-router.post('/auth/send-verification', isAuthenticated, (req, res) => {
+router.post('/send-verification', isAuthenticated, (req, res) => {
     const { email } = req.user;
 
     // Generar un token único

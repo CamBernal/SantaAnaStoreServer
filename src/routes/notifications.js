@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 /**
  * Enviar una notificación por correo
  */
-router.post('/notications/email', isAuthenticated, (req, res) => {
+router.post('/email', isAuthenticated, (req, res) => {
     const { to, subject, text } = req.body;
 
     const mailOptions = {

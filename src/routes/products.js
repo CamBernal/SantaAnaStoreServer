@@ -3,7 +3,7 @@ const db = require('../database/db'); // Importar la conexión a la base de dato
 const router = express.Router();
 
 // Obtener todos los productos con sus categorías
-router.get('/products', (req, res) => {
+router.get('/', (req, res) => {
     const query = `
         SELECT products.*, categories.name AS category_name
         FROM products
@@ -39,7 +39,7 @@ router.get('/products', (req, res) => {
 });
 
 // Crear un nuevo producto
-router.post('/products/add', (req, res) => {
+router.post('/add', (req, res) => {
     console.log(req.body); // Verificar el cuerpo de la solicitud
     const { name, category_id, price, description, image, stock } = req.body;
     const query = `
@@ -55,7 +55,7 @@ router.post('/products/add', (req, res) => {
 });
 
 // Actualizar un producto
-router.put('products/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const { id } = req.params;
     const { name, category_id, price, description, image, stock } = req.body;
     const query = `
@@ -72,7 +72,7 @@ router.put('products/update/:id', (req, res) => {
 });
 
 // Eliminar un producto
-router.delete('/products/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const { id } = req.params;
     const query = 'DELETE FROM products WHERE id = ?';
     db.query(query, [id], (err) => {
@@ -87,7 +87,7 @@ router.delete('/products/delete/:id', (req, res) => {
  * Manejar las presentaciones de los productos
  */
 // Obtener todas las presentaciones de un producto
-router.get('/products/:id/presentations', (req, res) => {
+router.get('/:id/presentations', (req, res) => {
     const { id } = req.params;
     const query = `
         SELECT presentations.*
@@ -103,7 +103,7 @@ router.get('/products/:id/presentations', (req, res) => {
 });
 
 // Crear una nueva presentación para un producto
-router.post('/products/:id/presentations/add', (req, res) => {
+router.post('/:id/presentations/add', (req, res) => {
     const { id } = req.params;
     const { type, size, price, stock } = req.body;
     const query = `
@@ -119,7 +119,7 @@ router.post('/products/:id/presentations/add', (req, res) => {
 });
 
 // Actualizar una presentación
-router.put('/products/presentations/update/:presentationId', (req, res) => {
+router.put('/presentations/update/:presentationId', (req, res) => {
     const { presentationId } = req.params;
     const { type, size, price, stock } = req.body;
     const query = `
@@ -136,7 +136,7 @@ router.put('/products/presentations/update/:presentationId', (req, res) => {
 });
 
 // Eliminar una presentación
-router.delete('/products/presentations/delete/:presentationId', (req, res) => {
+router.delete('/presentations/delete/:presentationId', (req, res) => {
     const { presentationId } = req.params;
     const query = 'DELETE FROM presentations WHERE id = ?';
     db.query(query, [presentationId], (err) => {
@@ -151,7 +151,7 @@ router.delete('/products/presentations/delete/:presentationId', (req, res) => {
 /**
  * Buscar productos por nombre
  */
-router.get('/products/search', (req, res) => {
+router.get('/search', (req, res) => {
     const { q } = req.query; // `q` es el término de búsqueda
     const query = `
         SELECT * FROM products
@@ -166,7 +166,7 @@ router.get('/products/search', (req, res) => {
 /**
  * Filtrar productos por categoría
  */
-router.get('/products/filter', (req, res) => {
+router.get('/filter', (req, res) => {
     const { category_id, min_price, max_price } = req.query;
 
     let query = `
